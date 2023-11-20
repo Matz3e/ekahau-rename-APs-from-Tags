@@ -8,21 +8,9 @@ Prerequisites
 
     Python (Version 3.x is recommended)
     Access to the JSON files for Tag Keys (tagKeys.json) and Access Points (accessPoints.json)
-    Understanding of Ekahau Pro Zone tagging requirements
+    Save the .esx file local. Rename it to .zip - replace the generated accessPoints.json. Zip it and rename it so .esx again.
 
-Usage
 
-    Install Python:
-
-    Ensure that Python is installed on your system. You can download and install Python from python.org.
-
-    Clone the Repository:
-
-    Clone the repository to your local system:
-
-    bash
-
-git clone <Repository-URL>
 
 Run the Script:
 
