@@ -27,7 +27,7 @@ Found the following .esx files:
 Enter the number of the .esx file to process: 2
 Enter the old ComCab (3-digit number after 'usw'): XXX
 Enter the floor (e.g., 'u1', 'u2', '00', '01', '02', etc.): 00
-Processing complete for USB_LC2023_OP-OST.esx.
+Processing complete for test.esx.
 
 
 Notes
