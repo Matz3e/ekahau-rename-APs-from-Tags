@@ -16,11 +16,19 @@ Run the Script:
 Navigate to the cloned repository directory and execute the script:
 Make sure that the ekahau projekt file are in the same directory as the script.
 
-The script will replace the placeholders in the Access Point names following the naming convention: 
+python3 cc_to_tags_v1.1.py 
 
-- uswXXX-Floor+SequentialNumber 
-- set the appropriate tag in Ekahau Zone 
-- ensure only one tag per access point, containing only the number.
+Found the following .esx files:
+1. modified_updated_file.esx
+2. test.esx
+3. updated_file.esx
+4. modified_Untitled.esx
+
+Enter the number of the .esx file to process: 2
+Enter the old ComCab (3-digit number after 'usw'): XXX
+Enter the floor (e.g., 'u1', 'u2', '00', '01', '02', etc.): 00
+Processing complete for USB_LC2023_OP-OST.esx.
+
 
 Notes
 
