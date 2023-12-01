@@ -1,27 +1,36 @@
+import os
+import zipfile
 import json
+import re
+import sys
 
-def replace_placeholders(access_points, tag_keys):
-    for access_point in access_points:
-        tags = access_point.get("tags", [])
-        if tags:
-            tag_key_id = tags[0]["tagKeyId"]
-            tag_key = next((key["key"] for key in tag_keys if key["id"] == tag_key_id), None)
-            if tag_key is not None:
-                access_point["name"] = access_point["name"].replace("XXX", tag_key)
+def replace_names(data):
+    pattern = r'(usw\d{3})-([a-zA-Z0-9]+)-(\d{3})'
+    def replace(match):
+        prefix, suffix, number = match.groups()
+        new_number = str(int(number) + 1).zfill(3)
+        return f"{prefix}-{suffix}-{new_number}"
+    return re.sub(pattern, replace, data)
 
 if __name__ == "__main__":
-    # Lese die Inhalte der JSON-Dateien
-    with open("tagKeys.json", "r") as tag_keys_file:
-        tag_keys_data = json.load(tag_keys_file)["tagKeys"]
-
-    with open("accessPoints.json", "r") as access_points_file:
-        access_points_data = json.load(access_points_file)["accessPoints"]
-
-    # Ersetze die Platzhalter
-    replace_placeholders(access_points_data, tag_keys_data)
-
-    # Speichere die aktualisierten Daten zurück in die accessPoints.json-Datei
-    with open("accessPoints.json", "w") as access_points_file:
-        json.dump({"accessPoints": access_points_data}, access_points_file, indent=2)
-
-    print("Platzhalter erfolgreich ersetzt.")
+    if len(sys.argv) < 2:
+        print("Usage: python replace_names.py file.esx")
+        sys.exit(1)
+    filename = sys.argv[1]
+    directory = os.path.splitext(filename)[0]
+    with zipfile.ZipFile(filename, 'r') as zip_ref:
+        zip_ref.extractall(directory)
+    with open(os.path.join(directory, 'accessPoints.json'), 'r') as f:
+        data = f.read()
+        modified_data = replace_names(data)
+    with open(os.path.join(directory, 'accessPoints.json'), 'w') as f:
+        f.write(modified_data)
+    new_filename = os.path.join(os.path.dirname(filename), f"modified_{os.path.basename(filename)}")
+    with zipfile.ZipFile(new_filename, 'w') as zip_ref:
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                file_path = os.path.join(root, file)
+                zip_ref.write(file_path, os.path.relpath(file_path, directory))
+    print(f"Modified file saved as {new_filename}")
+    # optional: delete temporary directory
+    os.rmdir(directory)
