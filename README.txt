@@ -8,16 +8,19 @@ The script also ensures that in Ekahau, each access point is assigned a tag with
 Prerequisites
 
 Python (Version 3.x is recommended)
-Access to the JSON files for Tag Keys (tagKeys.json) and Access Points (accessPoints.json)
-Save the .esx file local. Rename it to .zip - replace the generated accessPoints.json. Zip it and rename it to .esx again.
+Ekahau Projekt local saved
 
 
 Run the Script:
 
 Navigate to the cloned repository directory and execute the script:
-Make sure that the tagKeys.json and accessPoints.json files are in the same directory as the script.
+Make sure that the ekahau projekt file are in the same directory as the script.
 
-The script will replace the placeholders in the Access Point names following the naming convention uswXXX-Floor+SequentialNumber, set the appropriate tag in Ekahau Pro Zone, and ensure only one tag per access point, containing only the number.
+The script will replace the placeholders in the Access Point names following the naming convention: 
+
+- uswXXX-Floor+SequentialNumber 
+- set the appropriate tag in Ekahau Zone 
+- ensure only one tag per access point, containing only the number.
 
 Notes
 
